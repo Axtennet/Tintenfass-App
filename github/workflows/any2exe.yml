@@ -1,0 +1,26 @@
+name: Any2EXE Build
+on:
+  push:
+    branches: ["any2exe/**"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node .any2exe/build.js
+      - uses: actions/upload-artifact@v4
+        with:
+          name: exe
+          path: out/*.exe
+          if-no-files-found: error
+      - name: Release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "exe-${{ github.run_number }}" out/*.exe --target "${{ github.sha }}" --title "Any2EXE #${{ github.run_number }}" --notes "Gebaut mit Any2EXE"

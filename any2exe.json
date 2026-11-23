@@ -1,0 +1,15 @@
+{
+  "type": "web",
+  "name": "Tintenfass",
+  "ver": "1.0.0",
+  "url": "https://axtennet.github.io/Tintenfass/",
+  "width": 1280,
+  "height": 800,
+  "fullscreen": false,
+  "frameless": true,
+  "single": true,
+  "gui": "auto",
+  "entry": "",
+  "main": "",
+  "py": "3.12"
+}
